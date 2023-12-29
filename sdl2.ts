@@ -1,15 +1,18 @@
-import { EventType, WindowBuilder } from "https://deno.land/x/sdl2/mod.ts";
+import {
+  EventType,
+  WindowBuilder,
+} from "https://deno.land/x/sdl2@0.7.0/mod.ts";
 import type { NativeWindow, NativeWindowOptions } from "./window.ts";
 
-class SDL2Window implements NativeWindow {
+export class SDL2Window implements NativeWindow {
   private window: WindowBuilder;
 
   constructor(title: string, options?: NativeWindowOptions) {
-    this.window = new WindowBuilder({
+    this.window = new WindowBuilder(
       title,
-      width: options?.width ?? 640,
-      height: options?.height ?? 480,
-    }).build();
+      options?.width ?? 640,
+      options?.height ?? 480,
+    ).build();
   }
 
   getContext(): GPUCanvasContext {
@@ -22,7 +25,14 @@ class SDL2Window implements NativeWindow {
     return createWindowSurface(system, windowHandle, displayHandle);
   }
 
-  draw(): void {
-    // ...
+  draw(callback): void {
+    setInterval(() => {
+      const { value } = this.window.events().next();
+      if (value?.type === EventType.Quit) {
+        Deno.exit(0);
+      }
+
+      callback();
+    }, 0);
   }
 }

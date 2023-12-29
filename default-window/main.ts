@@ -1,21 +1,3 @@
-## `gfx-deno`
-
-Based on the WebGPU external surface proposal:
-https://github.com/denoland/deno/issues/21713
-
-<!--
-Add more examples:
-
-- []
--->
-
-### Contributing
-
-Create a new directory with a short sensible name.
-
-Add an example by following this boilerplate:
-
-```typescript
 // Creates a default window.
 
 import NativeWindow from "../window.ts";
@@ -30,12 +12,15 @@ const adapter = await navigator.gpu.requestAdapter();
 const device = await adapter.requestDevice();
 
 const context = win.getContext();
-// ...
+context.configure({
+  device,
+  width: flags.width,
+  height: flags.height,
+  format: "bgra8unorm",
+});
 
 function frame() {
   // ...
-  context.present();
 }
 
 win.draw(frame);
-```
