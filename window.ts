@@ -6,7 +6,8 @@ export interface NativeWindowOptions {
 }
 
 export interface NativeWindow {
-  constructor(title: string, options?: NativeWindowOptions): void;
+  surface: Deno.UnsafeWindowSurface | null;
+  // constructor(title: string, options?: NativeWindowOptions): void;
 
   getContext(): GPUCanvasContext;
 

@@ -11,7 +11,7 @@ const win = new NativeWindow("Conway's Game of Life", {
 });
 
 const adapter = await navigator.gpu.requestAdapter();
-const device = await adapter.requestDevice();
+const device = await adapter!.requestDevice();
 
 const context = win.getContext();
 const presentationFormat = "bgra8unorm";
@@ -76,8 +76,8 @@ fn main(@location(0) cell: f32) -> @location(0) vec4<f32> {
 context.configure({
   device: device,
   format: "bgra8unorm",
-  height: height,
-  width: width,
+  // height: height,
+  // width: width,
 });
 
 const computeShader = device.createShaderModule({ code: computeWgsl });
@@ -177,9 +177,9 @@ function resetGameData() {
     compute: {
       module: computeShader,
       entryPoint: "main",
-      constants: {
-        blockSize: GameOptions.workgroupSize,
-      },
+      // constants: {
+      //   blockSize: GameOptions.workgroupSize,
+      // },
     },
   });
   const sizeBuffer = device.createBuffer({
@@ -278,7 +278,7 @@ function resetGameData() {
           view,
           loadOp: "clear",
           storeOp: "store",
-          clearColor: { r: 0, g: 0, b: 0, a: 1 },
+          // clearColor: { r: 0, g: 0, b: 0, a: 1 },
         },
       ],
     };
@@ -303,7 +303,7 @@ function resetGameData() {
     passEncoderRender.end();
 
     device.queue.submit([commandEncoder.finish()]);
-    context.present();
+    win.surface!.present();
   };
 }
 

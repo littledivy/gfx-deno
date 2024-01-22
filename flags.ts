@@ -1,6 +1,6 @@
-import { parse } from "https://deno.land/std@0.207.0/flags/mod.ts";
+import { parseArgs } from "https://deno.land/std@0.207.0/cli/mod.ts";
 
-const flags = parse(Deno.args, {
+const flags = parseArgs(Deno.args, {
   default: {
     width: 640,
     height: 480,

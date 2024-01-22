@@ -9,13 +9,13 @@ const win = new NativeWindow("Hello World", {
 });
 
 const adapter = await navigator.gpu.requestAdapter();
-const device = await adapter.requestDevice();
+const device = await adapter!.requestDevice();
 
 const context = win.getContext();
 context.configure({
   device,
-  width: flags.width,
-  height: flags.height,
+  // width: flags.width,
+  // height: flags.height,
   format: "bgra8unorm",
 });
 
