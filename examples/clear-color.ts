@@ -1,6 +1,6 @@
 // Clears the screen to a solid color changing every frame.
 
-import NativeWindow from "../window.ts";
+import NativeWindow from "../mod.ts";
 import flags from "../flags.ts";
 
 const win = new NativeWindow("Hello World", {

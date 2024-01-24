@@ -1,6 +1,6 @@
 // Creates a default window.
 
-import NativeWindow from "../window.ts";
+import NativeWindow from "../mod.ts";
 import flags from "../flags.ts";
 
 const win = new NativeWindow("Hello World", {

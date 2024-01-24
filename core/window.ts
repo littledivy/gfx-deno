@@ -1,4 +1,4 @@
-import { SDL2Window } from "./sdl2.ts";
+import { SDL2Window } from "../backends/sdl2.ts";
 
 export interface NativeWindowOptions {
   width: number;

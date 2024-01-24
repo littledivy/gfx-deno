@@ -3,7 +3,7 @@ import {
   Window,
   WindowBuilder,
 } from "https://deno.land/x/sdl2@0.7.0/mod.ts";
-import type { NativeWindow, NativeWindowOptions } from "./window.ts";
+import type { NativeWindow, NativeWindowOptions } from "../mod.ts";
 
 export class SDL2Window implements NativeWindow {
   #window: Window;

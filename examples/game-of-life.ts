@@ -1,6 +1,6 @@
 // Conway's Game of Life
 
-import NativeWindow from "../window.ts";
+import NativeWindow from "../mod.ts";
 
 const width = 512;
 const height = 512;
