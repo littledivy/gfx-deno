@@ -76,8 +76,8 @@ fn main(@location(0) cell: f32) -> @location(0) vec4<f32> {
 context.configure({
   device: device,
   format: "bgra8unorm",
-  // height: height,
-  // width: width,
+  height: height,
+  width: width,
 });
 
 const computeShader = device.createShaderModule({ code: computeWgsl });

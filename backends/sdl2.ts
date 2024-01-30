@@ -6,11 +6,11 @@ import {
 import type { NativeWindow, NativeWindowOptions } from "../mod.ts";
 
 export class SDL2Window implements NativeWindow {
-  #window: Window;
+  #win: Window;
   surface: Deno.UnsafeWindowSurface | null = null;
 
   constructor(title: string, options?: NativeWindowOptions) {
-    this.#window = new WindowBuilder(
+    this.#win = new WindowBuilder(
       title,
       options?.width ?? 640,
       options?.height ?? 480,
@@ -22,21 +22,19 @@ export class SDL2Window implements NativeWindow {
       system,
       windowHandle,
       displayHandle,
-    ] = this.#window.rawHandle();
+    ] = this.#win.rawHandle();
     this.surface = new Deno.UnsafeWindowSurface(
       system as ("cocoa" | "win32" | "x11"),
-      new Deno.UnsafePointerView(windowHandle!),
-      displayHandle === null
-        ? null
-        : new Deno.UnsafePointerView(displayHandle!),
+      windowHandle!,
+      displayHandle === null ? null : displayHandle!,
     );
     return this.surface.getContext("webgpu");
   }
 
-  // deno-lint-ignore no-explicit-any
-  draw(callback: any): void {
+  // deno-lint-ignore no-explicit-any require-await
+  async draw(callback: any): Promise<void> {
     setInterval(() => {
-      const { value } = this.#window.events().next();
+      const { value } = this.#win.events().next();
       if (value?.type === EventType.Quit) {
         Deno.exit(0);
       }

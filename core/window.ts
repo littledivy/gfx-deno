@@ -1,4 +1,5 @@
-import { SDL2Window } from "../backends/sdl2.ts";
+// import { SDL2Window } from "../backends/sdl2.ts";
+import { DwmWindow } from "../backends/dwm.ts";
 
 export interface NativeWindowOptions {
   width: number;
@@ -7,13 +8,12 @@ export interface NativeWindowOptions {
 
 export interface NativeWindow {
   surface: Deno.UnsafeWindowSurface | null;
-  // constructor(title: string, options?: NativeWindowOptions): void;
 
   getContext(): GPUCanvasContext;
 
   draw(
     callback: () => void,
-  ): void;
+  ): Promise<void>;
 }
 
-export default SDL2Window;
+export default DwmWindow;
